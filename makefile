@@ -2,8 +2,9 @@
 #---Prefs---
 PROJECT=lucid_glasses
 MMCU=attiny25
-F_CPU=1000000 #1 MHz
-FUSEBITS=0x62
+#F_CPU=1000000 #1 MHz
+F_CPU=128000
+FUSEBITS=0xe4
 #-----------
 
 

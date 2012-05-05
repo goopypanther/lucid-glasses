@@ -15,23 +15,26 @@ Programmed for Attiny25
 
 int main(void) {
  //Var
- volatile uint8_t i;
+ volatile uint16_t i;
 
  //set up port b
  DDRB |= 1<<PB0 | 1<<PB1; //PB0, PB1 output
  
  //Do some blinking to show it's working
  PORTB |= 1<<PB0 | 1<<PB1; //Turn on leds
- _delay_ms(1000); //wait 1 sec
+ _delay_ms(500); //wait 1/2 sec
  PORTB = 0; //Turn off leds
- _delay_ms(1000); //wait 1 sec
+ _delay_ms(500); //wait 1/2 sec
  PORTB |= 1<<PB0 | 1<<PB1; //Turn on leds
- _delay_ms(1000); //wait 1 sec
+ _delay_ms(500); //wait 1/2 sec
  PORTB = 0; //turn off leds
 
- _delay_ms(7200000); //delay 2 hours
+ //Wait 2 hours
+ for(i = 1200; i > 0; i--) { //delay 2 hours, 1200 loops
+ _delay_ms(6000); //delay 6 sec
+ }
 
- for(i = 18; i > 0; i--) {
+ for(i = 18; i > 0; i--) { // loop blinking 18 times, ~3 hours
   PORTB |= 1<<PB0 | 1<<PB1; //Turn on leds
   _delay_ms(1000);
   PORTB = 0; //Turn off leds
@@ -63,7 +66,10 @@ int main(void) {
   PORTB |= 1<<PB0 | 1<<PB1; //Turn on leds
   _delay_ms(100);
   PORTB = 0; //Turn off leds
-  _delay_ms(600000);         //Wait 10 minutes 
+  
+  for(i = 100; i > 0; i--) { //wait 10 mintutes
+   _delay_ms(6000);         //Wait 6 seconds 
+  }
  }
 
 
@@ -72,5 +78,7 @@ int main(void) {
  set_sleep_mode(SLEEP_MODE_PWR_DOWN); //Select powerdown sleep mode
  sleep_enable(); //enable sleep bit
  sleep_mode(); //sleep, don't wake up
+
+ return(0);
 }
 
